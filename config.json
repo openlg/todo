@@ -1,0 +1,7 @@
+{
+  "port": 3030,
+  "tap_data": {
+    "url": "http://localhost:3030/api",
+    "access_code": "LsejfJLkKEjFnceKdwSDcfk"
+  }
+}
