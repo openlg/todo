@@ -15,6 +15,9 @@ import {
   del,
   requestBody,
 } from '@loopback/rest';
+import {
+  authenticate,
+} from '@loopback/authentication';
 import {Todo} from '../models';
 import {TodoRepository} from '../repositories';
 
@@ -24,6 +27,7 @@ export class TodoController {
     public todoRepository : TodoRepository,
   ) {}
 
+  @authenticate('BasicStrategy')
   @post('/todo', {
     responses: {
       '200': {
@@ -50,6 +54,7 @@ export class TodoController {
     return await this.todoRepository.count(where);
   }
 
+  @authenticate('BasicStrategy')
   @get('/todo', {
     responses: {
       '200': {

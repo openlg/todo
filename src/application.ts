@@ -3,7 +3,9 @@ import {ApplicationConfig} from '@loopback/core';
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
+import {AuthenticationComponent, AuthenticationBindings} from '@loopback/authentication';
 import {MySequence} from './sequence';
+import {AuthBasicStrategyProvider} from './providers';
 import * as path from 'path';
 
 export class TodoApplication extends BootMixin(
@@ -11,6 +13,9 @@ export class TodoApplication extends BootMixin(
 ) {
   constructor(options: ApplicationConfig = {}) {
     super(options);
+
+    this.component(AuthenticationComponent);
+    this.bind(AuthenticationBindings.STRATEGY).toProvider(AuthBasicStrategyProvider);
 
     // Set up the custom sequence
     this.sequence(MySequence);
